@@ -3,6 +3,8 @@ package pl.codeleak.samples.unit_testing.registration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static pl.codeleak.samples.unit_testing.registration.ValidationResultAssertion.assertThat;
+
 @DisplayName("Registration form validation")
 class RegistrationFormValidatorAssertJCustomAssertionTest {
 
@@ -16,7 +18,8 @@ class RegistrationFormValidatorAssertJCustomAssertionTest {
         // act
         ValidationResult result = validator.validate(form);
         // assert
-        // TODO
+        assertThat(result)
+            .hasNoErrors();
     }
 
     @Test
@@ -27,7 +30,10 @@ class RegistrationFormValidatorAssertJCustomAssertionTest {
         // act
         ValidationResult result = validator.validate(form);
         // assert
-        // TODO
+        assertThat(result)
+            .hasErrors()
+            .hasErrorCount(2)
+            .hasErrorMessages("username is invalid", "password is invalid");
     }
 
     @Test
@@ -38,7 +44,10 @@ class RegistrationFormValidatorAssertJCustomAssertionTest {
         // act
         ValidationResult result = validator.validate(form);
         // assert
-        // TODO
+        assertThat(result)
+            .hasErrors()
+            .hasErrorCount(1)
+            .hasErrorMessages("username is invalid");
     }
 
     @Test
@@ -49,7 +58,10 @@ class RegistrationFormValidatorAssertJCustomAssertionTest {
         // act
         ValidationResult result = validator.validate(form);
         // assert
-        // TODO
+        assertThat(result)
+            .hasErrors()
+            .hasErrorCount(1)
+            .hasErrorMessages("passwords do not match");
     }
 
     @Test
@@ -60,6 +72,9 @@ class RegistrationFormValidatorAssertJCustomAssertionTest {
         // act
         ValidationResult result = validator.validate(form);
         // assert
-        // TODO
+        assertThat(result)
+            .hasErrors()
+            .hasErrorCount(1)
+            .hasErrorMessages("password is invalid");
     }
 }
