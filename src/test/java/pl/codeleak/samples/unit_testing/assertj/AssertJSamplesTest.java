@@ -1,5 +1,6 @@
 package pl.codeleak.samples.unit_testing.assertj;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -23,7 +24,17 @@ class AssertJSamplesTest {
         String string = "AssertJ";
 
         // assert
-        // TODO
+        assertThat(bool).isTrue();
+
+        assertThat(integer)
+            .isLessThan(3)
+            .isGreaterThan(1);
+
+        assertThat(string)
+            .hasSize(7)
+            .matches("^AssertJ$")
+            .contains("t")
+            .doesNotContain("x");
     }
 
     @Test
@@ -32,7 +43,9 @@ class AssertJSamplesTest {
         LocalDate localDate = LocalDate.of(2011, 1, 1);
 
         // assert
-        // TODO
+        assertThat(localDate)
+            .isBefore(LocalDate.now())
+            .isAfter(LocalDate.of(2010, 1, 1));
     }
 
     @Test
@@ -41,7 +54,11 @@ class AssertJSamplesTest {
         List<String> list = Arrays.asList("one", "two", "three", "four");
 
         // assert
-        // TODO
+        assertThat(list)
+            .isNotEmpty()
+            .containsAnyOf("two", "four")
+            .containsSubsequence("two", "three")
+            .containsOnlyOnce("one");
     }
 
     @Test
@@ -55,7 +72,10 @@ class AssertJSamplesTest {
         map.put(5, "five");
 
         // assert
-        // TODO
+        assertThat(map)
+            .doesNotContainKeys(6, 7)
+            .containsKeys(1, 3)
+            .containsValues("one", "five");
     }
 
     @Test
@@ -64,7 +84,11 @@ class AssertJSamplesTest {
         String[] array = new String[]{"one", "two", "three", "four"};
 
         // assert
-        // TODO
+        assertThat(array)
+            .isNotEmpty()
+            .containsAnyOf("two", "four")
+            .containsSubsequence("two", "three")
+            .containsOnlyOnce("one");
     }
 
     @Test
@@ -74,7 +98,9 @@ class AssertJSamplesTest {
         File file2 = File.createTempFile("abc", "xyz");
 
         // assert
-        // TODO
+        assertThat(file1)
+            .isFile()
+            .hasSameContentAs(file2);
     }
 
     @Test
@@ -85,6 +111,10 @@ class AssertJSamplesTest {
         String string = "AssertJ";
 
         // assert
-        // TODO
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(bool).isTrue();
+        softAssertions.assertThat(integer).isBetween(0, 3).isPositive();
+        softAssertions.assertThat(string).contains("t");
+        softAssertions.assertAll();
     }
 }
