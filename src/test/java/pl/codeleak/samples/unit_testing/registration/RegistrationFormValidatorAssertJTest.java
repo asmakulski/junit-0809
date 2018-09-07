@@ -18,7 +18,8 @@ class RegistrationFormValidatorAssertJTest {
         // act
         ValidationResult result = validator.validate(form);
         // assert
-        // TODO
+        assertThat(result.hasErrors())
+            .isFalse();
     }
 
     @Test
@@ -29,7 +30,11 @@ class RegistrationFormValidatorAssertJTest {
         // act
         ValidationResult result = validator.validate(form);
         // assert
-        // TODO
+        assertThat(result.hasErrors())
+            .isTrue();
+        assertThat(result.getAllErrors())
+            .hasSize(2)
+            .contains("username is invalid", "password is invalid");
     }
 
     @Test
@@ -40,7 +45,11 @@ class RegistrationFormValidatorAssertJTest {
         // act
         ValidationResult result = validator.validate(form);
         // assert
-        // TODO
+        assertThat(result.hasErrors())
+            .isTrue();
+        assertThat(result.getAllErrors())
+            .hasSize(1)
+            .contains("username is invalid");
     }
 
     @Test
@@ -51,7 +60,11 @@ class RegistrationFormValidatorAssertJTest {
         // act
         ValidationResult result = validator.validate(form);
         // assert
-        // TODO
+        assertThat(result.hasErrors())
+            .isTrue();
+        assertThat(result.getAllErrors())
+            .hasSize(1)
+            .contains("passwords do not match");
     }
 
     @Test
@@ -62,6 +75,10 @@ class RegistrationFormValidatorAssertJTest {
         // act
         ValidationResult result = validator.validate(form);
         // assert
-        // TODO
+        assertThat(result.hasErrors())
+            .isTrue();
+        assertThat(result.getAllErrors())
+            .hasSize(1)
+            .contains("password is invalid");
     }
 }
